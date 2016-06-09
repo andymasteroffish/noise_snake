@@ -23,12 +23,17 @@ void ofApp::setup(){
     sparks.clear();
     
     resetGame();
+    
+    setTitle();
+    onTitle = true;
 }
 
 //--------------------------------------------------------------
 void ofApp::resetGame(){
     gameOver = false;
+    onTitle = false;
     snake.setup(GRID_SIZE);
+    resetGameTimer = gameOverTime;
     
     
     int hue = ofRandom(256);
@@ -48,6 +53,9 @@ void ofApp::update(){
     float pulseSpeed = 10;
     
     maxVol = ofMap(snake.score, 0, 40, 0.3, 0.9, true);
+    if (onTitle){
+        maxVol = 0.1;
+    }
     
     //turn everythign off
     for (int x=0; x<GRID_SIZE; x++){
@@ -57,7 +65,7 @@ void ofApp::update(){
         }
     }
     
-    if (!gameOver){
+    if (!gameOver && !onTitle){
     
         //did the snake eat the food?
         if (foodX == snake.curX && foodY == snake.curY){
@@ -71,6 +79,7 @@ void ofApp::update(){
         //check if we're dead
         if (snake.justDied){
             snake.justDied = false;
+            cout<<"snake ded"<<endl;
             endGame();
         }
         
@@ -88,13 +97,27 @@ void ofApp::update(){
         //gridf[foodX][foodY] = 0.5 + 0.5*abs(cos( ofGetElapsedTimef() * pulseSpeed * 3));
     }
     
-    if (gameOver){
+    if (gameOver && !onTitle){
         gridf[snake.curX][snake.curY] = ofGetFrameNum() % 20 > 10;
         
         resetGameTimer--;
         if (resetGameTimer <= 0){
-            resetGame();
+            cout<<"go title"<<endl;
+            onTitle = true;
         }
+    }
+    
+    if (onTitle){
+        
+        for (int x=0; x<GRID_SIZE; x++){
+            for (int y=0; y<GRID_SIZE; y++){
+                if (titleGrid[x][y]){
+                    //gridf[x][y] = 0.5 + 0.5 * abs(sin(ofGetElapsedTimef() + x*GRID_SIZE+y));
+                    gridf[x][y] = ofRandom(0.2,1);// ofRandomuf() < 0.8 ? 1 : 0;
+                }
+            }
+        }
+        
     }
     
     //also update and add the sparks if any are present
@@ -200,6 +223,10 @@ void ofApp::keyPressed(int key){
     }
     
     snake.keyPressed(key);
+    
+    if (onTitle){
+        resetGame();
+    }
 }
 
 //--------------------------------------------------------------
@@ -300,9 +327,109 @@ void ofApp::endGame(){
         }
     }
     
-    resetGameTimer = gameOverTime;
 }
 
 
-
+//--------------------------------------------------------------
+void ofApp::setTitle(){
+    for (int x=0; x<GRID_SIZE; x++){
+        for (int y=0; y<GRID_SIZE; y++){
+            titleGrid[x][y] = false;
+        }
+    }
+    
+    titleGrid[0][2] = true;
+    titleGrid[0][3] = true;
+    titleGrid[0][4] = true;
+    titleGrid[0][5] = true;
+    titleGrid[0][6] = true;
+    
+    titleGrid[1][3] = true;
+    titleGrid[1][9] = true;
+    titleGrid[1][10] = true;
+    titleGrid[1][11] = true;
+    titleGrid[1][13] = true;
+    
+    titleGrid[2][4] = true;
+    titleGrid[2][9] = true;
+    titleGrid[2][11] = true;
+    titleGrid[2][12] = true;
+    titleGrid[2][13] = true;
+    
+    titleGrid[3][2] = true;
+    titleGrid[3][3] = true;
+    titleGrid[3][4] = true;
+    titleGrid[3][5] = true;
+    titleGrid[3][6] = true;
+    
+    titleGrid[4][9] = true;
+    titleGrid[4][10] = true;
+    titleGrid[4][11] = true;
+    titleGrid[4][12] = true;
+    titleGrid[4][13] = true;
+    
+    titleGrid[5][3] = true;
+    titleGrid[5][4] = true;
+    titleGrid[5][5] = true;
+    titleGrid[5][10] = true;
+    
+    titleGrid[6][2] = true;
+    titleGrid[6][6] = true;
+    titleGrid[6][11] = true;
+    
+    titleGrid[7][3] = true;
+    titleGrid[7][4] = true;
+    titleGrid[7][5] = true;
+    titleGrid[7][9] = true;
+    titleGrid[7][10] = true;
+    titleGrid[7][11] = true;
+    titleGrid[7][12] = true;
+    titleGrid[7][13] = true;
+    
+    titleGrid[9][2] = true;
+    titleGrid[9][3] = true;
+    titleGrid[9][4] = true;
+    titleGrid[9][5] = true;
+    titleGrid[9][6] = true;
+    titleGrid[9][9] = true;
+    titleGrid[9][10] = true;
+    titleGrid[9][11] = true;
+    titleGrid[9][12] = true;
+    titleGrid[9][13] = true;
+    
+    titleGrid[10][10] = true;
+    titleGrid[10][11] = true;
+    
+    titleGrid[11][2] = true;
+    titleGrid[11][3] = true;
+    titleGrid[11][4] = true;
+    titleGrid[11][6] = true;
+    titleGrid[11][9] = true;
+    titleGrid[11][12] = true;
+    titleGrid[11][13] = true;
+    
+    titleGrid[12][2] = true;
+    titleGrid[12][4] = true;
+    titleGrid[12][5] = true;
+    titleGrid[12][6] = true;
+    
+    titleGrid[13][9] = true;
+    titleGrid[13][10] = true;
+    titleGrid[13][11] = true;
+    titleGrid[13][12] = true;
+    titleGrid[13][13] = true;
+    
+    titleGrid[14][2] = true;
+    titleGrid[14][3] = true;
+    titleGrid[14][4] = true;
+    titleGrid[14][5] = true;
+    titleGrid[14][6] = true;
+    titleGrid[14][9] = true;
+    titleGrid[14][11] = true;
+    titleGrid[14][13] = true;
+    
+    titleGrid[15][2] = true;
+    titleGrid[15][4] = true;
+    titleGrid[15][6] = true;
+}
 

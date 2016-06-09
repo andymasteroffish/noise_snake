@@ -28,6 +28,8 @@ class ofApp : public ofBaseApp{
     void setFood();
     void endGame();
     
+    void setTitle();
+    
     int bufferSize;
     
     ofSoundStream soundStream;
@@ -54,4 +56,9 @@ class ofApp : public ofBaseApp{
     vector<Spark> sparks;
     int resetGameTimer;
     int gameOverTime;
+    
+    //title stuff
+    bool onTitle;
+    bool titleGrid[GRID_SIZE][GRID_SIZE];
+
 };
