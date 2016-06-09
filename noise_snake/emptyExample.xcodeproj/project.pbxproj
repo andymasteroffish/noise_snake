@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		577D29E01D09FB0100058BA4 /* Spark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 577D29DE1D09FB0100058BA4 /* Spark.cpp */; };
 		57C220B21D09DA2900364CAB /* Snake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C220B01D09DA2900364CAB /* Snake.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
@@ -43,6 +44,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		577D29DE1D09FB0100058BA4 /* Spark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Spark.cpp; sourceTree = "<group>"; };
+		577D29DF1D09FB0100058BA4 /* Spark.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Spark.hpp; sourceTree = "<group>"; };
 		57C220B01D09DA2900364CAB /* Snake.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Snake.cpp; sourceTree = "<group>"; };
 		57C220B11D09DA2900364CAB /* Snake.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Snake.hpp; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -110,6 +113,8 @@
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				57C220B11D09DA2900364CAB /* Snake.hpp */,
 				57C220B01D09DA2900364CAB /* Snake.cpp */,
+				577D29DF1D09FB0100058BA4 /* Spark.hpp */,
+				577D29DE1D09FB0100058BA4 /* Spark.cpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -213,6 +218,7 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				57C220B21D09DA2900364CAB /* Snake.cpp in Sources */,
+				577D29E01D09FB0100058BA4 /* Spark.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

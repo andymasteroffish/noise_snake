@@ -2,10 +2,12 @@
 
 #include "ofMain.h"
 #include "Snake.hpp"
+#include "Spark.hpp"
 
 class ofApp : public ofBaseApp{
 	public:
 		void setup();
+    void resetGame();
 		void update();
 		void draw();
 		
@@ -24,6 +26,7 @@ class ofApp : public ofBaseApp{
     void audioOut(float * output, int bufferSize, int nChannels);
     
     void setFood();
+    void endGame();
     
     int bufferSize;
     
@@ -39,9 +42,13 @@ class ofApp : public ofBaseApp{
     int pos;
     
     
-    //the snake
+    //game stuff
     Snake snake;
     
-    //the food
     int foodX, foodY;
+    
+    bool gameOver;
+    vector<Spark> sparks;
+    int resetGameTimer;
+    int gameOverTime;
 };

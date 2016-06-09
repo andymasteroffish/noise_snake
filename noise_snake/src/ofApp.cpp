@@ -11,12 +11,17 @@ void ofApp::setup(){
     audioValues.assign(bufferSize, 0.0);
     
     cellSize = 15;
-//    for (int x=0; x<GRID_SIZE; x++){
-//        for (int y=0; y<GRID_SIZE; y++){
-//            grid[x][y] = ofRandomuf() > 0.5;
-//        }
-//    }
+
+    gameOverTime = 240;
     
+    sparks.clear();
+    
+    resetGame();
+}
+
+//--------------------------------------------------------------
+void ofApp::resetGame(){
+    gameOver = false;
     snake.setup(GRID_SIZE);
     
     setFood();
@@ -27,15 +32,6 @@ void ofApp::update(){
     
     float pulseSpeed = 10;
     
-    //did the snake eat the food?
-    if (foodX == snake.curX && foodY == snake.curY){
-        snake.eat();
-        setFood();
-    }
-    
-    //update the snake
-    snake.update();
-    
     //turn everythign off
     for (int x=0; x<GRID_SIZE; x++){
         for (int y=0; y<GRID_SIZE; y++){
@@ -44,17 +40,60 @@ void ofApp::update(){
         }
     }
     
-    //turn on the parts of the snake
-    grid[snake.curX][snake.curY] = true;
-    gridf[snake.curX][snake.curY] = 1;
-    for (int i=0; i<snake.trailX.size(); i++){
-        grid[snake.trailX[i]][snake.trailY[i]] = true;
-        gridf[snake.trailX[i]][snake.trailY[i]] = 0.5 + 0.5*abs(sin(ofGetElapsedTimef() * pulseSpeed + i *0.2) );
+    if (!gameOver){
+    
+        //did the snake eat the food?
+        if (foodX == snake.curX && foodY == snake.curY){
+            snake.eat();
+            setFood();
+        }
+        
+        //update the snake
+        snake.update();
+        
+        //check if we're dead
+        if (snake.justDied){
+            snake.justDied = false;
+            endGame();
+        }
+        
+        //turn on the parts of the snake
+        grid[snake.curX][snake.curY] = true;
+        gridf[snake.curX][snake.curY] = 1;
+        for (int i=0; i<snake.trailX.size(); i++){
+            grid[snake.trailX[i]][snake.trailY[i]] = true;
+            gridf[snake.trailX[i]][snake.trailY[i]] = 0.5 + 0.5*abs(sin(ofGetElapsedTimef() * pulseSpeed + i *0.2) );
+        }
+        
+        //and the food
+        grid[foodX][foodY] = 1;//ofGetFrameNum()%2==0;
+        gridf[foodX][foodY] = ofGetFrameNum() % 6 > 2 ? 1 : 0;
+        //gridf[foodX][foodY] = 0.5 + 0.5*abs(cos( ofGetElapsedTimef() * pulseSpeed * 3));
     }
     
-    //and the food
-    grid[foodX][foodY] = 1;//ofGetFrameNum()%2==0;
-    gridf[foodX][foodY] = 0.5 + 0.5*abs(cos( ofGetElapsedTimef() * pulseSpeed * 3));
+    if (gameOver){
+        gridf[snake.curX][snake.curY] = ofGetFrameNum() % 20 > 10;
+        
+        resetGameTimer--;
+        if (resetGameTimer <= 0){
+            resetGame();
+        }
+    }
+    
+    //also update and add the sparks if any are present
+    for (int i=sparks.size()-1; i>=0; i--){
+        sparks[i].update();
+        if (sparks[i].deathTimer <= 0){
+            sparks.erase( sparks.begin()+i );
+        }else{
+            gridf[sparks[i].curX][sparks[i].curY] += sparks[i].curVal;
+            gridf[sparks[i].curX][sparks[i].curY] = MIN(gridf[sparks[i].curX][sparks[i].curY], 1);
+        }
+    }
+    
+    
+    
+    
 }
 
 
@@ -82,9 +121,13 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
+    ofPushMatrix();
+    
+    ofTranslate(8, 2);
+    
     for (int x=0; x<GRID_SIZE; x++){
         for (int y=0; y<GRID_SIZE; y++){
-            if (grid[x][y]){
+            if (gridf[x][y] > 0){
                 ofFill();
                 float thisCol = 0 * gridf[x][y] + 200 * (1-gridf[x][y]);
                 ofSetColor(thisCol);
@@ -97,6 +140,8 @@ void ofApp::draw(){
         }
     }
     
+    ofPopMatrix();
+    
     //let's draw the nasty sound we're making too
     float graphHeight = 50;
     ofSetColor(0);
@@ -108,6 +153,8 @@ void ofApp::draw(){
         ofDrawLine(i, ofGetHeight()-valA-5, i+1, ofGetHeight()-valB-5);
             
     }
+    
+    
 
 }
 
@@ -131,6 +178,10 @@ void ofApp::keyPressed(int key){
     
     if (key == 'f'){
         setFood();
+    }
+    
+    if (key == 'e'){
+        endGame();
     }
     
     snake.keyPressed(key);
@@ -220,6 +271,22 @@ void ofApp::setFood(){
     }
 }
 
+
+//--------------------------------------------------------------
+void ofApp::endGame(){
+    gameOver = true;
+    
+    //make some sparks on the snake body
+    for (int i=0; i<snake.trailX.size(); i++){
+        for (int k=0; k<2; k++){
+            Spark thisSpark;
+            thisSpark.setup(snake.trailX[i], snake.trailY[i], GRID_SIZE);
+            sparks.push_back(thisSpark);
+        }
+    }
+    
+    resetGameTimer = gameOverTime;
+}
 
 
 

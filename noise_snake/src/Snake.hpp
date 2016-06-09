@@ -33,6 +33,12 @@ public:
     vector<int> trailX;
     vector<int> trailY;
     
+    bool canChangeDir;
+    
+    bool justDied;
+    
+    int score;
+    
 };
 
 #endif /* Snake_hpp */
