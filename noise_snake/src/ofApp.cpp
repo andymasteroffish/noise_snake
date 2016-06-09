@@ -12,7 +12,8 @@ void ofApp::setup(){
     
     cellSize = 15;
 
-    gameOverTime = 240;
+    gameOverTime = 180;
+    showScoreTime = 180;
     
     onColor.set(0,0,0);
     offColor.set(255, 255, 255);
@@ -56,6 +57,9 @@ void ofApp::update(){
     if (onTitle){
         maxVol = 0.1;
     }
+    if (gameOver && resetGameTimer < 0){
+        maxVol = 0.1;
+    }
     
     //turn everythign off
     for (int x=0; x<GRID_SIZE; x++){
@@ -79,7 +83,6 @@ void ofApp::update(){
         //check if we're dead
         if (snake.justDied){
             snake.justDied = false;
-            cout<<"snake ded"<<endl;
             endGame();
         }
         
@@ -98,11 +101,22 @@ void ofApp::update(){
     }
     
     if (gameOver && !onTitle){
-        gridf[snake.curX][snake.curY] = ofGetFrameNum() % 20 > 10;
+        if (resetGameTimer > 0){
+            gridf[snake.curX][snake.curY] = ofGetFrameNum() % 20 > 10;
+        }
+        else{
+            for (int x=0; x<GRID_SIZE; x++){
+                for (int y=0; y<GRID_SIZE; y++){
+                    if (scoreGrid[x][y]){
+                        gridf[x][y] = ofGetFrameNum() % 20 > 10;
+                    }
+                }
+            }
+
+        }
         
         resetGameTimer--;
-        if (resetGameTimer <= 0){
-            cout<<"go title"<<endl;
+        if (resetGameTimer <= -showScoreTime){
             onTitle = true;
         }
     }
@@ -192,6 +206,11 @@ void ofApp::draw(){
             
     }
     
+    
+    if (onTitle){
+        ofSetColor(onColor);
+        ofDrawBitmapString("By Andy Wallace 2016", 8, GRID_SIZE*cellSize+12);
+    }
     
 
 }
@@ -327,6 +346,21 @@ void ofApp::endGame(){
         }
     }
     
+    //get the tens one one place of the score
+    int firstScoreNum = (int) floor((snake.score/10) * 10) /10;
+    int secondScoreNum = snake.score % 10;
+    
+    //clear the score grid
+    for (int x=0; x<GRID_SIZE; x++){
+        for (int y=0; y<GRID_SIZE; y++){
+            scoreGrid[x][y] = 0;
+        }
+    }
+    
+    //add the numbers
+    setScoreGrid(firstScoreNum, 3, 4);
+    setScoreGrid(secondScoreNum, 9, 4);
+    
 }
 
 
@@ -431,5 +465,198 @@ void ofApp::setTitle(){
     titleGrid[15][2] = true;
     titleGrid[15][4] = true;
     titleGrid[15][6] = true;
+}
+
+//--------------------------------------------------------------
+void ofApp::setScoreGrid(int num, int xOffset, int yOffset){
+    
+    if (num == 0){
+        scoreGrid[0+xOffset][1+yOffset] = true;
+        scoreGrid[0+xOffset][2+yOffset] = true;
+        scoreGrid[0+xOffset][3+yOffset] = true;
+        scoreGrid[0+xOffset][4+yOffset] = true;
+        scoreGrid[0+xOffset][5+yOffset] = true;
+        
+        scoreGrid[1+xOffset][0+yOffset] = true;
+        scoreGrid[1+xOffset][6+yOffset] = true;
+        
+        scoreGrid[2+xOffset][0+yOffset] = true;
+        scoreGrid[2+xOffset][6+yOffset] = true;
+        
+        scoreGrid[3+xOffset][1+yOffset] = true;
+        scoreGrid[3+xOffset][2+yOffset] = true;
+        scoreGrid[3+xOffset][3+yOffset] = true;
+        scoreGrid[3+xOffset][4+yOffset] = true;
+        scoreGrid[3+xOffset][5+yOffset] = true;
+    }
+    
+    if (num == 1){
+        scoreGrid[1+xOffset][1+yOffset] = true;
+        scoreGrid[1+xOffset][6+yOffset] = true;
+        
+        scoreGrid[2+xOffset][0+yOffset] = true;
+        scoreGrid[2+xOffset][1+yOffset] = true;
+        scoreGrid[2+xOffset][2+yOffset] = true;
+        scoreGrid[2+xOffset][3+yOffset] = true;
+        scoreGrid[2+xOffset][4+yOffset] = true;
+        scoreGrid[2+xOffset][5+yOffset] = true;
+        scoreGrid[2+xOffset][6+yOffset] = true;
+        
+        scoreGrid[3+xOffset][6+yOffset] = true;
+    }
+    
+    if (num == 2){
+        scoreGrid[0+xOffset][1+yOffset] = true;
+        scoreGrid[0+xOffset][5+yOffset] = true;
+        scoreGrid[0+xOffset][6+yOffset] = true;
+        
+        scoreGrid[1+xOffset][0+yOffset] = true;
+        scoreGrid[1+xOffset][4+yOffset] = true;
+        scoreGrid[1+xOffset][6+yOffset] = true;
+        
+        scoreGrid[2+xOffset][0+yOffset] = true;
+        scoreGrid[2+xOffset][3+yOffset] = true;
+        scoreGrid[2+xOffset][6+yOffset] = true;
+        
+        scoreGrid[3+xOffset][1+yOffset] = true;
+        scoreGrid[3+xOffset][2+yOffset] = true;
+        scoreGrid[3+xOffset][6+yOffset] = true;
+    }
+    
+    if (num == 3){
+        scoreGrid[0+xOffset][0+yOffset] = true;
+        scoreGrid[0+xOffset][6+yOffset] = true;
+        
+        scoreGrid[1+xOffset][0+yOffset] = true;
+        scoreGrid[1+xOffset][3+yOffset] = true;
+        scoreGrid[1+xOffset][6+yOffset] = true;
+        
+        scoreGrid[2+xOffset][0+yOffset] = true;
+        scoreGrid[2+xOffset][3+yOffset] = true;
+        scoreGrid[2+xOffset][6+yOffset] = true;
+        
+        scoreGrid[3+xOffset][1+yOffset] = true;
+        scoreGrid[3+xOffset][2+yOffset] = true;
+        scoreGrid[3+xOffset][4+yOffset] = true;
+        scoreGrid[3+xOffset][5+yOffset] = true;
+    }
+    
+    if (num == 4){
+        scoreGrid[0+xOffset][0+yOffset] = true;
+        scoreGrid[0+xOffset][1+yOffset] = true;
+        scoreGrid[0+xOffset][2+yOffset] = true;
+        scoreGrid[0+xOffset][3+yOffset] = true;
+        
+        scoreGrid[1+xOffset][3+yOffset] = true;
+        scoreGrid[2+xOffset][3+yOffset] = true;
+        
+        scoreGrid[3+xOffset][0+yOffset] = true;
+        scoreGrid[3+xOffset][1+yOffset] = true;
+        scoreGrid[3+xOffset][2+yOffset] = true;
+        scoreGrid[3+xOffset][3+yOffset] = true;
+        scoreGrid[3+xOffset][4+yOffset] = true;
+        scoreGrid[3+xOffset][5+yOffset] = true;
+        scoreGrid[3+xOffset][6+yOffset] = true;
+    }
+    
+    if (num == 5){
+        scoreGrid[0+xOffset][0+yOffset] = true;
+        scoreGrid[0+xOffset][1+yOffset] = true;
+        scoreGrid[0+xOffset][2+yOffset] = true;
+        scoreGrid[0+xOffset][3+yOffset] = true;
+        scoreGrid[0+xOffset][6+yOffset] = true;
+        
+        scoreGrid[1+xOffset][0+yOffset] = true;
+        scoreGrid[1+xOffset][3+yOffset] = true;
+        scoreGrid[1+xOffset][6+yOffset] = true;
+        
+        scoreGrid[2+xOffset][0+yOffset] = true;
+        scoreGrid[2+xOffset][3+yOffset] = true;
+        scoreGrid[2+xOffset][6+yOffset] = true;
+        
+        scoreGrid[3+xOffset][0+yOffset] = true;
+        scoreGrid[3+xOffset][4+yOffset] = true;
+        scoreGrid[3+xOffset][5+yOffset] = true;
+    }
+    
+    if (num == 6){
+        scoreGrid[0+xOffset][0+yOffset] = true;
+        scoreGrid[0+xOffset][1+yOffset] = true;
+        scoreGrid[0+xOffset][2+yOffset] = true;
+        scoreGrid[0+xOffset][3+yOffset] = true;
+        scoreGrid[0+xOffset][4+yOffset] = true;
+        scoreGrid[0+xOffset][5+yOffset] = true;
+        scoreGrid[0+xOffset][6+yOffset] = true;
+        
+        scoreGrid[1+xOffset][0+yOffset] = true;
+        scoreGrid[1+xOffset][3+yOffset] = true;
+        scoreGrid[1+xOffset][6+yOffset] = true;
+        
+        scoreGrid[2+xOffset][0+yOffset] = true;
+        scoreGrid[2+xOffset][3+yOffset] = true;
+        scoreGrid[2+xOffset][6+yOffset] = true;
+        
+        scoreGrid[3+xOffset][0+yOffset] = true;
+        scoreGrid[3+xOffset][3+yOffset] = true;
+        scoreGrid[3+xOffset][4+yOffset] = true;
+        scoreGrid[3+xOffset][5+yOffset] = true;
+        scoreGrid[3+xOffset][6+yOffset] = true;
+    }
+    
+    if (num == 7){
+        scoreGrid[0+xOffset][0+yOffset] = true;
+        scoreGrid[1+xOffset][0+yOffset] = true;
+        scoreGrid[2+xOffset][0+yOffset] = true;
+        
+        scoreGrid[3+xOffset][0+yOffset] = true;
+        scoreGrid[3+xOffset][1+yOffset] = true;
+        scoreGrid[3+xOffset][2+yOffset] = true;
+        scoreGrid[3+xOffset][3+yOffset] = true;
+        scoreGrid[3+xOffset][4+yOffset] = true;
+        scoreGrid[3+xOffset][5+yOffset] = true;
+        scoreGrid[3+xOffset][6+yOffset] = true;
+    }
+    
+    if (num == 8){
+        scoreGrid[0+xOffset][1+yOffset] = true;
+        scoreGrid[0+xOffset][2+yOffset] = true;
+        scoreGrid[0+xOffset][4+yOffset] = true;
+        scoreGrid[0+xOffset][5+yOffset] = true;
+        
+        scoreGrid[1+xOffset][0+yOffset] = true;
+        scoreGrid[1+xOffset][3+yOffset] = true;
+        scoreGrid[1+xOffset][6+yOffset] = true;
+        
+        scoreGrid[2+xOffset][0+yOffset] = true;
+        scoreGrid[2+xOffset][3+yOffset] = true;
+        scoreGrid[2+xOffset][6+yOffset] = true;
+        
+        scoreGrid[3+xOffset][1+yOffset] = true;
+        scoreGrid[3+xOffset][2+yOffset] = true;
+        scoreGrid[3+xOffset][4+yOffset] = true;
+        scoreGrid[3+xOffset][5+yOffset] = true;
+    }
+    
+    if (num == 9){
+        scoreGrid[0+xOffset][0+yOffset] = true;
+        scoreGrid[0+xOffset][1+yOffset] = true;
+        scoreGrid[0+xOffset][2+yOffset] = true;
+        scoreGrid[0+xOffset][3+yOffset] = true;
+        
+        scoreGrid[1+xOffset][0+yOffset] = true;
+        scoreGrid[1+xOffset][3+yOffset] = true;
+        
+        scoreGrid[2+xOffset][0+yOffset] = true;
+        scoreGrid[2+xOffset][3+yOffset] = true;
+        
+        scoreGrid[3+xOffset][0+yOffset] = true;
+        scoreGrid[3+xOffset][1+yOffset] = true;
+        scoreGrid[3+xOffset][2+yOffset] = true;
+        scoreGrid[3+xOffset][3+yOffset] = true;
+        scoreGrid[3+xOffset][4+yOffset] = true;
+        scoreGrid[3+xOffset][5+yOffset] = true;
+        scoreGrid[3+xOffset][6+yOffset] = true;
+    }
+    
 }
 

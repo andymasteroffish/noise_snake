@@ -27,6 +27,7 @@ class ofApp : public ofBaseApp{
     
     void setFood();
     void endGame();
+    void setScoreGrid(int num, int xOffset, int yOffset);
     
     void setTitle();
     
@@ -56,6 +57,8 @@ class ofApp : public ofBaseApp{
     vector<Spark> sparks;
     int resetGameTimer;
     int gameOverTime;
+    int showScoreTime;
+    bool scoreGrid[GRID_SIZE][GRID_SIZE];
     
     //title stuff
     bool onTitle;
