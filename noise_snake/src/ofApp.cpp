@@ -209,9 +209,10 @@ void ofApp::draw(){
     
     if (onTitle){
         ofSetColor(onColor);
-        ofDrawBitmapString("By Andy Wallace 2016", 8, GRID_SIZE*cellSize+12);
+        ofDrawBitmapString("Andy Wallace - @andy_makes\n2016", 8, GRID_SIZE*cellSize+12);
     }
     
+   // ofDrawBitmapString("By Andy Wallace - @andy_makes", 6, 11);
 
 }
 
