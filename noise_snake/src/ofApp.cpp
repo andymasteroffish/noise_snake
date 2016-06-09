@@ -14,6 +14,12 @@ void ofApp::setup(){
 
     gameOverTime = 240;
     
+    onColor.set(0,0,0);
+    offColor.set(255, 255, 255);
+    
+    maxVol = 0.4;
+
+    
     sparks.clear();
     
     resetGame();
@@ -24,6 +30,15 @@ void ofApp::resetGame(){
     gameOver = false;
     snake.setup(GRID_SIZE);
     
+    
+    int hue = ofRandom(256);
+    int hue2 = (hue + 128) % 256;
+    
+    offColor.setHsb(hue, 50, 250);
+    onColor.setHsb(hue2, 250, 100);
+    
+    ofBackground(offColor);
+    
     setFood();
 }
 
@@ -31,6 +46,8 @@ void ofApp::resetGame(){
 void ofApp::update(){
     
     float pulseSpeed = 10;
+    
+    maxVol = ofMap(snake.score, 0, 40, 0.3, 0.9, true);
     
     //turn everythign off
     for (int x=0; x<GRID_SIZE; x++){
@@ -101,8 +118,6 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::audioOut(float * output, int bufferSize, int nChannels){
     
-    float maxVol = 0.45;
-    
     for (int i=0; i<bufferSize; i++){
         int relPos = (pos + i)%bufferSize;
         int x = floor(relPos / GRID_SIZE);
@@ -129,11 +144,11 @@ void ofApp::draw(){
         for (int y=0; y<GRID_SIZE; y++){
             if (gridf[x][y] > 0){
                 ofFill();
-                float thisCol = 0 * gridf[x][y] + 200 * (1-gridf[x][y]);
+                ofColor thisCol = onColor * gridf[x][y] + offColor * (1-gridf[x][y]);
                 ofSetColor(thisCol);
             }else{
                 ofNoFill();
-                ofSetColor(0);
+                ofSetColor(onColor);
             }
             
             ofDrawRectangle(x*cellSize, y*cellSize, cellSize, cellSize);
@@ -144,7 +159,7 @@ void ofApp::draw(){
     
     //let's draw the nasty sound we're making too
     float graphHeight = 50;
-    ofSetColor(0);
+    ofSetColor(onColor);
     for (int i=0; i<bufferSize-1; i++){
         
         float valA = audioValues[i] * graphHeight;

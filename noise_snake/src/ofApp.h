@@ -31,6 +31,7 @@ class ofApp : public ofBaseApp{
     int bufferSize;
     
     ofSoundStream soundStream;
+    float maxVol;
     
     vector<float> audioValues;
     
@@ -40,6 +41,8 @@ class ofApp : public ofBaseApp{
     int cellSize;
     
     int pos;
+    
+    ofColor onColor, offColor;
     
     
     //game stuff
