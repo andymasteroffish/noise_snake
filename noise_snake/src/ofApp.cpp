@@ -61,6 +61,8 @@ void ofApp::update(){
         maxVol = 0.2;
     }
     
+    maxVol = 0; //KILL ME
+    
     //turn everythign off
     for (int x=0; x<GRID_SIZE; x++){
         for (int y=0; y<GRID_SIZE; y++){
