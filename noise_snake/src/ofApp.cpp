@@ -3,6 +3,9 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    publicRelease = false;
+    debugMute = false;
+    
     ofSetFrameRate(60);
 
     bufferSize = 256;
@@ -26,6 +29,8 @@ void ofApp::setup(){
     onTitle = true;
     
     captureScreen = false;
+    captureOneScreenshot = false;
+    debugPause = false;
 }
 
 //--------------------------------------------------------------
@@ -60,7 +65,7 @@ void ofApp::update(){
         maxVol = 0.2;
     }
     
-    //maxVol = 0; //KILL ME
+    if (debugMute)  maxVol = 0;
     
     //turn everythign off
     for (int x=0; x<GRID_SIZE; x++){
@@ -79,7 +84,9 @@ void ofApp::update(){
         }
         
         //update the snake
-        snake.update();
+        if (!debugPause){
+            snake.update();
+        }
         
         //check if we're dead
         if (snake.justDied){
@@ -194,6 +201,9 @@ void ofApp::draw(){
             }
             
             ofDrawRectangle(x*cellSize, y*cellSize, cellSize, cellSize);
+            
+            ofSetColor(0);
+            ofDrawBitmapString(ofToString(y*GRID_SIZE+x), x*GRID_SIZE+1, y*GRID_SIZE+13);
         }
     }
     
@@ -232,7 +242,8 @@ void ofApp::draw(){
     ofSetColor(onColor);
     ofDrawBitmapString("Andy Wallace  @andy_makes  2016", padding, ofGetHeight()-4);
     
-    if (captureScreen){
+    if (captureScreen || captureOneScreenshot){
+        captureOneScreenshot = false;
         ofImage screenPic;
         screenPic.allocate(ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
         screenPic.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
@@ -245,18 +256,36 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
-//    if (key == 'f'){
-//        setFood();
-//    }
-//    
-//    if (key == 'e'){
-//        endGame();
-//    }
-    
-//    if (key == 'c'){
-//        captureScreen = !captureScreen;
-//        return;
-//    }
+    if (!publicRelease){
+        if (key == 'f'){
+            setFood();
+        }
+        
+        if (key == 'e'){
+            endGame();
+        }
+        
+        if (key == 'c'){
+            captureScreen = !captureScreen;
+            return;
+        }
+        
+        if (key == 'v'){
+            captureOneScreenshot = true;
+        }
+        
+        if (key == 'p'){
+            debugPause = !debugPause;
+        }
+        
+        if (key == 'm'){
+            debugMute = !debugMute;
+        }
+        
+        if (key == 'r'){
+            resetGame();
+        }
+    }
     
     snake.keyPressed(key);
     

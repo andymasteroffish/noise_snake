@@ -31,6 +31,9 @@ class ofApp : public ofBaseApp{
     
     void setTitle();
     
+    bool publicRelease;
+    bool debugMute;
+    
     int bufferSize;
     
     ofSoundStream soundStream;
@@ -64,6 +67,9 @@ class ofApp : public ofBaseApp{
     bool onTitle;
     bool titleGrid[GRID_SIZE][GRID_SIZE];
     
+    //debug
     bool captureScreen;
+    bool captureOneScreenshot;
+    bool debugPause;
 
 };
