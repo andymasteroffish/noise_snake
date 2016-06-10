@@ -41,7 +41,7 @@ class ofApp : public ofBaseApp{
     
     vector<float> audioValues;
     
-#define GRID_SIZE 16
+    #define GRID_SIZE 16
     bool grid[GRID_SIZE][GRID_SIZE];
     float gridf[GRID_SIZE][GRID_SIZE];
     int cellSize;

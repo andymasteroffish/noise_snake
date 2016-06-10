@@ -9,7 +9,7 @@ void ofApp::setup(){
     ofSetFrameRate(60);
 
     bufferSize = 256;
-    soundStream.setup(this, 2, 2, 44100, bufferSize, 4);
+    soundStream.setup(this, 2, 0, 44100, bufferSize, 4);
     
     audioValues.assign(bufferSize, 0.0);
     
@@ -202,8 +202,9 @@ void ofApp::draw(){
             
             ofDrawRectangle(x*cellSize, y*cellSize, cellSize, cellSize);
             
-            ofSetColor(0);
-            ofDrawBitmapString(ofToString(y*GRID_SIZE+x), x*GRID_SIZE+1, y*GRID_SIZE+13);
+            //showing the array number
+//            ofSetColor(0);
+//            ofDrawBitmapString(ofToString(x*GRID_SIZE+y), x*cellSize+1, y*cellSize+13);
         }
     }
     
