@@ -37,7 +37,7 @@ void Snake::setup(int _gridSize){
 
 void Snake::update(){
     
-    framesToMove = ofMap(score, 0, 50, 13, 4, true);
+    framesToMove = ofMap(score, 0, 70, 13, 4, true);
     
     //tick down the move timer
     moveTimer--;

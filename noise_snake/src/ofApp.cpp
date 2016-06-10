@@ -10,7 +10,7 @@ void ofApp::setup(){
     
     audioValues.assign(bufferSize, 0.0);
     
-    cellSize = 15;
+    cellSize = 16;
 
     gameOverTime = 180;
     showScoreTime = 180;
@@ -55,10 +55,10 @@ void ofApp::update(){
     
     maxVol = ofMap(snake.score, 0, 40, 0.3, 0.9, true);
     if (onTitle){
-        maxVol = 0.1;
+        maxVol = 0.15;
     }
     if (gameOver && resetGameTimer < 0){
-        maxVol = 0.1;
+        maxVol = 0.2;
     }
     
     //turn everythign off
@@ -157,8 +157,10 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels){
     
     for (int i=0; i<bufferSize; i++){
         int relPos = (pos + i)%bufferSize;
+        
         int x = floor(relPos / GRID_SIZE);
         int y = relPos % GRID_SIZE;
+        
         
         output[i*2  ] = gridf[x][y] * maxVol;
         output[i*2+1] = output[i*2];
@@ -173,9 +175,11 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
+    int padding = 8;
+    
     ofPushMatrix();
     
-    ofTranslate(8, 2);
+    ofTranslate(padding, padding*3);
     
     for (int x=0; x<GRID_SIZE; x++){
         for (int y=0; y<GRID_SIZE; y++){
@@ -192,25 +196,42 @@ void ofApp::draw(){
         }
     }
     
+    //label it
+    ofDrawBitmapString("Game:", 0, -4);
+    
     ofPopMatrix();
     
     //let's draw the nasty sound we're making too
-    float graphHeight = 50;
+    int boxHeight = 64;
+    float graphHeight = boxHeight - padding;
+    
+    ofPushMatrix();
+    ofTranslate(padding, ofGetHeight()-padding*4);
+    
     ofSetColor(onColor);
     for (int i=0; i<bufferSize-1; i++){
         
         float valA = audioValues[i] * graphHeight;
         float valB = audioValues[i+1] * graphHeight;
         
-        ofDrawLine(i, ofGetHeight()-valA-5, i+1, ofGetHeight()-valB-5);
+        ofDrawLine(i, -valA, i+1, -valB);
             
     }
     
+    //frame it
+    ofNoFill();
+    ofDrawRectangle(0,padding/2, 256, -boxHeight);
     
-    if (onTitle){
+    //label it
+    ofDrawBitmapString("Audio Buffer:", 0, -boxHeight -2);
+    
+    ofPopMatrix();
+    
+    
+    //if (onTitle){
         ofSetColor(onColor);
-        ofDrawBitmapString("Andy Wallace - @andy_makes\n2016", 8, GRID_SIZE*cellSize+12);
-    }
+        ofDrawBitmapString("Andy Wallace  @andy_makes  2016", padding, ofGetHeight()-4);
+    //}
     
    // ofDrawBitmapString("By Andy Wallace - @andy_makes", 6, 11);
 
@@ -218,29 +239,14 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if (key == 'c'){
-        for (int x=0; x<GRID_SIZE; x++){
-            for (int y=0; y<GRID_SIZE; y++){
-                grid[x][y] = false;
-            }
-        }
-    }
     
-    if (key == 'r'){
-        for (int x=0; x<GRID_SIZE; x++){
-            for (int y=0; y<GRID_SIZE; y++){
-                grid[x][y] = ofRandomuf() > 0.5;
-            }
-        }
-    }
-    
-    if (key == 'f'){
-        setFood();
-    }
-    
-    if (key == 'e'){
-        endGame();
-    }
+//    if (key == 'f'){
+//        setFood();
+//    }
+//    
+//    if (key == 'e'){
+//        endGame();
+//    }
     
     snake.keyPressed(key);
     
@@ -261,23 +267,11 @@ void ofApp::mouseMoved(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-    int col = x/cellSize;
-    int row = y/cellSize;
-    
-    if (col < GRID_SIZE && row < GRID_SIZE){
-        grid[col][row] = !grid[col][row];
-    }
+
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    
-    int col = x/cellSize;
-    int row = y/cellSize;
-    
-    if (col < GRID_SIZE && row < GRID_SIZE){
-        grid[col][row] = !grid[col][row];
-    }
     
 
 }
