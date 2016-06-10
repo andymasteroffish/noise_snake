@@ -63,5 +63,7 @@ class ofApp : public ofBaseApp{
     //title stuff
     bool onTitle;
     bool titleGrid[GRID_SIZE][GRID_SIZE];
+    
+    bool captureScreen;
 
 };

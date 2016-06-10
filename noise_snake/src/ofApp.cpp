@@ -15,9 +15,6 @@ void ofApp::setup(){
     gameOverTime = 180;
     showScoreTime = 180;
     
-    onColor.set(0,0,0);
-    offColor.set(255, 255, 255);
-    
     maxVol = 0.4;
 
     
@@ -27,6 +24,8 @@ void ofApp::setup(){
     
     setTitle();
     onTitle = true;
+    
+    captureScreen = false;
 }
 
 //--------------------------------------------------------------
@@ -61,7 +60,7 @@ void ofApp::update(){
         maxVol = 0.2;
     }
     
-    maxVol = 0; //KILL ME
+    //maxVol = 0; //KILL ME
     
     //turn everythign off
     for (int x=0; x<GRID_SIZE; x++){
@@ -230,12 +229,16 @@ void ofApp::draw(){
     ofPopMatrix();
     
     
-    //if (onTitle){
-        ofSetColor(onColor);
-        ofDrawBitmapString("Andy Wallace  @andy_makes  2016", padding, ofGetHeight()-4);
-    //}
+    ofSetColor(onColor);
+    ofDrawBitmapString("Andy Wallace  @andy_makes  2016", padding, ofGetHeight()-4);
     
-   // ofDrawBitmapString("By Andy Wallace - @andy_makes", 6, 11);
+    if (captureScreen){
+        ofImage screenPic;
+        screenPic.allocate(ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
+        screenPic.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
+        screenPic.save("captures/pic"+ofToString(ofGetFrameNum())+".png");
+        cout<<"snap "<<ofGetFrameNum()<<endl;
+    }
 
 }
 
@@ -250,11 +253,21 @@ void ofApp::keyPressed(int key){
 //        endGame();
 //    }
     
+//    if (key == 'c'){
+//        captureScreen = !captureScreen;
+//        return;
+//    }
+    
     snake.keyPressed(key);
+    
+    
     
     if (onTitle){
         resetGame();
+        //onTitle = true; //kill me
     }
+    
+    
 }
 
 //--------------------------------------------------------------
