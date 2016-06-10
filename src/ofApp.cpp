@@ -2,14 +2,15 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    
-    publicRelease = false;
+
+	publicRelease = true;
     debugMute = false;
     
     ofSetFrameRate(60);
 
     bufferSize = 256;
-    soundStream.setup(this, 2, 0, 44100, bufferSize, 4);
+	soundStream.setup(this, 2, 0, 22050, bufferSize, 1);
+	//soundStream.setup(this, 2, 0, 44100, bufferSize, 4);
     
     audioValues.assign(bufferSize, 0.0);
     
@@ -31,6 +32,7 @@ void ofApp::setup(){
     captureScreen = false;
     captureOneScreenshot = false;
     debugPause = false;
+
 }
 
 //--------------------------------------------------------------
@@ -162,9 +164,9 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::audioOut(float * output, int bufferSize, int nChannels){
-    
+	
     for (int i=0; i<bufferSize; i++){
-        int relPos = (pos + i)%bufferSize;
+		int relPos = i;
         
         int x = floor(relPos / GRID_SIZE);
         int y = relPos % GRID_SIZE;
@@ -175,8 +177,6 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels){
         
         audioValues[i] = gridf[x][y];
     }
-    
-    //pos++;
 }
 
 

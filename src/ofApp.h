@@ -46,8 +46,6 @@ class ofApp : public ofBaseApp{
     float gridf[GRID_SIZE][GRID_SIZE];
     int cellSize;
     
-    int pos;
-    
     ofColor onColor, offColor;
     
     
