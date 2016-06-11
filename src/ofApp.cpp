@@ -9,8 +9,12 @@ void ofApp::setup(){
     ofSetFrameRate(60);
 
     bufferSize = 256;
-	soundStream.setup(this, 2, 0, 22050, bufferSize, 1);
-	//soundStream.setup(this, 2, 0, 44100, bufferSize, 4);
+    
+    //Windows works better with this setup for some reason
+	//soundStream.setup(this, 2, 0, 22050, bufferSize, 1);
+    
+    //on mac I like to use this one
+	soundStream.setup(this, 2, 0, 44100, bufferSize, 4);
     
     audioValues.assign(bufferSize, 0.0);
     
