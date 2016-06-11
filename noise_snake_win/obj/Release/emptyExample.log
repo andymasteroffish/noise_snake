@@ -1,6 +1,0 @@
-﻿  ofApp.cpp
-     Creating library bin\emptyExample.lib and object bin\emptyExample.exp
-  LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
-  emptyExample.vcxproj -> C:\Users\awallace\Documents\of_v0.9.3_vs_release\apps\noise_snake\noise_snake_win\bin\emptyExample.exe
-  
-  	                   9	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\Win32\
