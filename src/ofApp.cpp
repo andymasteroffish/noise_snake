@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	publicRelease = true;
+    publicRelease = false;
     debugMute = false;
     
     ofSetFrameRate(60);
