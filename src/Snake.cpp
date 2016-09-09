@@ -92,22 +92,22 @@ void Snake::keyPressed(int key){
         return;
     }
     
-    if (key == OF_KEY_LEFT || key == 'a' || key == 'A'){
+    if ((key == OF_KEY_LEFT || key == 'a' || key == 'A') && xDir != 1){
         xDir = -1;
         yDir = 0;
         canChangeDir = false;
     }
-    if (key == OF_KEY_RIGHT || key == 'd' || key == 'D'){
+    if ((key == OF_KEY_RIGHT || key == 'd' || key == 'D') && xDir != -1){
         xDir = 1;
         yDir = 0;
         canChangeDir = false;
     }
-    if (key == OF_KEY_UP || key == 'w' || key == 'W'){
+    if ((key == OF_KEY_UP || key == 'w' || key == 'W') && yDir != 1){
         xDir = 0;
         yDir = -1;
         canChangeDir = false;
     }
-    if (key == OF_KEY_DOWN || key == 's' || key == 'S'){
+    if ((key == OF_KEY_DOWN || key == 's' || key == 'S') && yDir != -1){
         xDir = 0;
         yDir = 1;
         canChangeDir = false;

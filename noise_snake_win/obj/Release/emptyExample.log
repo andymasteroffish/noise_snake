@@ -3,42 +3,19 @@
   ofApp.cpp
   Snake.cpp
   Spark.cpp
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(320): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\main.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(325): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\main.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(320): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\Snake.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(325): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\Snake.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(320): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\ofApp.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(325): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\ofApp.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(320): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\Spark.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(325): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\Spark.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(969): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\ofApp.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(970): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\ofApp.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(971): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\ofApp.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(972): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\ofApp.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(969): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\main.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(970): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\main.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(971): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\main.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(972): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\main.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(969): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\Snake.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(970): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\Snake.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(971): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\Snake.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(972): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\Snake.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(969): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\Spark.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(970): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\Spark.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(971): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\Spark.cpp)
-C:\Users\awallace\Documents\of_v0.9.3_vs_release\libs\openFrameworks\math\ofMatrix4x4.h(972): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file ..\src\Spark.cpp)
-..\src\ofApp.cpp(152): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
      Creating library bin\emptyExample.lib and object bin\emptyExample.exp
   LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
   emptyExample.vcxproj -> C:\Users\awallace\Documents\of_v0.9.3_vs_release\apps\noise_snake\noise_snake_win\bin\emptyExample.exe
   
-  	                   9	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\x64\
-  	  *EXTRA File 		 1266176	C:\Users\awallace\Documents\of_v0.9.3_vs_release\apps\noise_snake\noise_snake_win\bin\fmodex.dll
-  	  *EXTRA File 		 1312768	C:\Users\awallace\Documents\of_v0.9.3_vs_release\apps\noise_snake\noise_snake_win\bin\fmodexL.dll
-  	    Older     		 4171776	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\x64\assimp.dll
-  	    Older     		 6402560	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\x64\FreeImage.dll
-  	    Older     		  734720	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\x64\freetype.dll
-  	    Older     		  289792	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\x64\glut32.dll
-  	    Older     		 2208256	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\x64\libeay32.dll
-  	    Older     		  458240	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\x64\ssleay32.dll
-  	    Older     		   81408	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\x64\Zlib.dll
+  	                   9	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\Win32\
+  	  *EXTRA File 		 1503232	C:\Users\awallace\Documents\of_v0.9.3_vs_release\apps\noise_snake\noise_snake_win\bin\fmodex64.dll
+  	  *EXTRA File 		 1552384	C:\Users\awallace\Documents\of_v0.9.3_vs_release\apps\noise_snake\noise_snake_win\bin\fmodexL64.dll
+  	    Newer     		 2939392	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\Win32\assimp.dll
+  	    New File  		 1266176	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\Win32\fmodex.dll
+  	    New File  		 1312768	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\Win32\fmodexL.dll
+  	    Newer     		 5647872	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\Win32\FreeImage.dll
+  	    Newer     		  580608	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\Win32\freetype.dll
+  	    Newer     		  237568	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\Win32\glut32.dll
+  	    Newer     		 1178624	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\Win32\libeay32.dll
+  	    Newer     		  269824	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\Win32\ssleay32.dll
+  	    Newer     		   69632	C:\Users\awallace\Documents\of_v0.9.3_vs_release\export\vs\Win32\Zlib.dll
